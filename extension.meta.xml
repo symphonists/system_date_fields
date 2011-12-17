@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension id="system_date_field" status="unmaintained" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+	<name>System Date Field</name>
+	<description>Exposes the internal creation date of an entry (read-only) in the format of a normal date field.</description>
+	<repo type="github">https://github.com/symphonists/system_date_field</repo>
+	<url type="discuss">http://symphony-cms.com/discuss/thread/32957/</url>
+	<types>
+		<type>Field</type>
+	</types>
+	<authors>
+		<author>
+			<name github="symphonycms" symphony="team">Symphony Team</name>
+			<website>http://symphony-cms.com</website>
+		</author>
+	</authors>
+	<releases>
+		<release version="1.0" date="2009-08-05" min="2.0.6" max="2.2.x" />
+	</releases>
+</extension>
