@@ -5,6 +5,8 @@
 - Build Date: 5th August 2009
 - Requirements: Symphony 2.0.6+
 
+**Deprecated** this field is no longer used.
+
 Exposes the internal creation date of an entry (read-only) in the format of a normal date field.
 
 NOTE: This field is not complete. The only thing it currently does is added the system date to the publish table for the section.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension id="system_date_field" status="unmaintained" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+<extension id="system_date_field" status="deprecated" xmlns="http://symphony-cms.com/schemas/extension/1.0">
 	<name>System Date Field</name>
 	<description>Exposes the internal creation date of an entry (read-only) in the format of a normal date field.</description>
 	<repo type="github">https://github.com/symphonists/system_date_field</repo>
