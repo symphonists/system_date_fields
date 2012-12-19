@@ -1,9 +1,9 @@
 # System Dates
 
 - Version: 1.0
-- Author: Alistair Kearney (alistair@symphony-cms.com)
-- Build Date: 5th August 2009
-- Requirements: Symphony 2.0.6+
+- Author: Symphonists Community
+- Build Date: 18th December 2012
+- Requirements: Symphony 2.3.1+
 
 **Deprecated** this field is no longer used.
 
