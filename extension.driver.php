@@ -1,27 +1,23 @@
 <?php
 
-	Class extension_System_Date_Field extends Extension{
-
-		public function about(){
-			return array(
-				'name' => 'Field: System Date',
-				'version' => '1.0',
-				'release-date' => '2009-08-05',
-				'author' => array(
-					'name' => 'Alistair Kearney',
-					'website' => 'http://www.symphony21.com',
-					'email' => 'alistair@symphony-cms.com'
-				)
-			);
-		}
+	Class extension_System_Date_Fields extends Extension{
 
 		public function uninstall(){
-			Symphony::Database()->query("DROP TABLE `tbl_fields_systemdate`");
+			Symphony::Database()->query("DROP TABLE `tbl_fields_systemcreateddate`");
+			Symphony::Database()->query("DROP TABLE `tbl_fields_systemmodifieddate`");
 		}
 
 		public function install(){
-			return Symphony::Database()->query("
-				CREATE TABLE `tbl_fields_systemdate` (
+			Symphony::Database()->query("
+				CREATE TABLE `tbl_fields_systemcreateddate` (
+					`id` int(11) unsigned NOT NULL auto_increment,
+					`field_id` int(11) unsigned NOT NULL,
+					PRIMARY KEY  (`id`),
+					KEY `field_id` (`field_id`)
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+			");
+			Symphony::Database()->query("
+				CREATE TABLE `tbl_fields_systemmodifieddate` (
 					`id` int(11) unsigned NOT NULL auto_increment,
 					`field_id` int(11) unsigned NOT NULL,
 					PRIMARY KEY  (`id`),
@@ -29,6 +25,4 @@
 				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 			");
 		}
-
 	}
-

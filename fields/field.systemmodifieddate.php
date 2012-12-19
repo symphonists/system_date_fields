@@ -1,10 +1,10 @@
 <?php
 
-	Class fieldSystemDate extends Field {
+	Class fieldSystemModifiedDate extends Field {
 
-		public function __construct(&$parent){
-			parent::__construct($parent);
-			$this->_name = __('System Date');
+		public function __construct(){
+			parent::__construct();
+			$this->_name = __('Date: System Modified');
 		}
 
 	/*-------------------------------------------------------------------------
@@ -25,7 +25,10 @@
 
 		private static function __dateFromEntryID($entry_id){
 			return Symphony::Database()->fetchRow(0, sprintf("
-				SELECT creation_date_gmt FROM `tbl_entries` WHERE `id` = %d LIMIT 1
+				SELECT modification_date_gmt
+				FROM `tbl_entries` 
+				WHERE `id` = %d 
+				LIMIT 1
 			", $entry_id));
 		}
 
@@ -65,8 +68,12 @@
 			$fields = array();
 			$fields['field_id'] = $id;
 
-			Symphony::Database()->query("DELETE FROM `tbl_fields_".$this->handle()."` WHERE `field_id` = '$id' LIMIT 1");
-			Symphony::Database()->insert($fields, 'tbl_fields_' . $this->handle());
+			Symphony::Database()->query("
+				DELETE FROM `tbl_fields_systemmodifieddate` 
+				WHERE `field_id` = '$id' 
+				LIMIT 1
+			");
+			Symphony::Database()->insert($fields, 'tbl_fields_systemmodifieddate');
 		}
 
 	/*-------------------------------------------------------------------------
@@ -76,7 +83,7 @@
 		public function prepareTableValue($data, XMLElement $link=NULL, $entry_id=NULL) {
 			$row = self::__dateFromEntryID($entry_id);
 
-			$value = DateTimeObj::get(__SYM_DATE_FORMAT__, strtotime($row['creation_date_gmt'] . ' +00:00'));
+			$value = DateTimeObj::get(__SYM_DATE_FORMAT__, strtotime($row['modification_date_gmt'] . ' +00:00'));
 
 			return parent::prepareTableValue(array('value' => $value), $link);
 		}
@@ -86,7 +93,7 @@
 	-------------------------------------------------------------------------*/
 
 		public function buildSortingSQL(&$joins, &$where, &$sort, $order='ASC'){
-			$sort = 'ORDER BY ' . (in_array(strtolower($order), array('random', 'rand')) ? 'RAND()' : "`e`.`creation_date_gmt` $order");
+			$sort = 'ORDER BY ' . (in_array(strtolower($order), array('random', 'rand')) ? 'RAND()' : "`e`.`modification_date_gmt` $order");
 		}
 
 	}
