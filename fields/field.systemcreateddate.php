@@ -55,7 +55,13 @@
 				Administration::instance()->Page->addStylesheetToHead(URL . '/extensions/system_date_fields/assets/system_date_fields.publish.css', 'screen', 104, false);
 			}
 
-			return;
+			$label = new XMLElement('label');
+			$wrapper->appendChild($label);
+			
+			$row = self::__dateFromEntryID($entry_id);
+			$value = DateTimeObj::get(__SYM_DATE_FORMAT__, strtotime($row['creation_date_gmt'] . ' +00:00'));
+			
+			$label->setValue($this->get('label') . ': ' . $value);
 		}
 
 		public function checkPostFieldData($data, &$message, $entry_id=NULL){
