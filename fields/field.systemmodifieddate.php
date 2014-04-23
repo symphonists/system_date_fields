@@ -46,6 +46,11 @@
 	-------------------------------------------------------------------------*/
 
 		public function displayPublishPanel(&$wrapper, $data = null, $error = null, $prefix = null, $postfix = null) {
+			// Append assets
+			if(class_exists('Administration')) {
+				Administration::instance()->Page->addStylesheetToHead(URL . '/extensions/system_date_fields/assets/system_date_fields.publish.css', 'screen', 104, false);
+			}
+
 			return;
 		}
 
