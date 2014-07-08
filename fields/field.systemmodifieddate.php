@@ -19,6 +19,10 @@
 			return true;
 		}
 
+		public function entryDataCleanup($entry_id, $data=NULL){
+			return true;
+		}
+
 	/*-------------------------------------------------------------------------
 		Utilities:
 	-------------------------------------------------------------------------*/
@@ -74,7 +78,7 @@
 			$fields['field_id'] = $id;
 
 			Symphony::Database()->query("
-				DELETE FROM `tbl_fields_systemmodifieddate` 
+				DELETE FROM `tbl_fields_systemmodifieddate`
 				WHERE `field_id` = '$id' 
 				LIMIT 1
 			");
