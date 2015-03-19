@@ -95,6 +95,8 @@
 		Output:
 	-------------------------------------------------------------------------*/
 
+		public function fetchIncludableElements() {}
+
 		public function prepareTableValue($data, XMLElement $link=NULL, $entry_id=NULL) {
 			$row = self::__dateFromEntryID($entry_id);
 
