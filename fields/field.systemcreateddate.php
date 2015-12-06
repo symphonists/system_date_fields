@@ -49,7 +49,8 @@
 		Input:
 	-------------------------------------------------------------------------*/
 
-		public function displayPublishPanel(&$wrapper, $data = null, $error = null, $prefix = null, $postfix = null) {
+		public function displayPublishPanel(XMLElement &$wrapper, $data = null, $flagWithError = null, $fieldnamePrefix = null, $fieldnamePostfix = null, $entry_id = null)
+		{
 			// Append assets
 			if(class_exists('Administration')) {
 				Administration::instance()->Page->addStylesheetToHead(URL . '/extensions/system_date_fields/assets/system_date_fields.publish.css', 'screen', 104, false);
