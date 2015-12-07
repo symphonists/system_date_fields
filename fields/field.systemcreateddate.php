@@ -36,13 +36,42 @@
 			", $entry_id));
 		}
 
+		private function getDateFormat()
+		{
+			return $this->get('show_time') == 'yes' ?
+				__SYM_DATETIME_FORMAT__ :
+				__SYM_DATE_FORMAT__;
+		}
+
+		private function formatDate($date)
+		{
+			return DateTimeObj::get($this->getDateFormat(), $date . ' +00:00');
+		}
+
 	/*-------------------------------------------------------------------------
 		Settings:
 	-------------------------------------------------------------------------*/
 
-		public function displaySettingsPanel(&$wrapper, $errors = null) {
+		public function displaySettingsPanel(&$wrapper, $errors = null)
+		{
 			parent::displaySettingsPanel($wrapper, $errors);
-			$this->appendShowColumnCheckbox($wrapper);
+			$fieldset = new XMLElement('fieldset');
+			$row = new XMLElement('div', null, array('class' => 'two columns'));
+			$this->appendShowColumnCheckbox($row);
+			$this->appendShowTimeColumnCheckbox($row);
+			$this->appendUseTimeAgoColumnCheckbox($row);
+			$fieldset->appendChild($row);
+			$wrapper->appendChild($fieldset);
+		}
+
+		protected function appendShowTimeColumnCheckbox(&$wrapper)
+		{
+			$this->createCheckboxSetting($wrapper, 'show_time', __('Display time'));
+		}
+
+		protected function appendUseTimeAgoColumnCheckbox(&$wrapper)
+		{
+			$this->createCheckboxSetting($wrapper, 'use_timeago', __('Use time ago'));
 		}
 
 	/*-------------------------------------------------------------------------
@@ -51,18 +80,24 @@
 
 		public function displayPublishPanel(XMLElement &$wrapper, $data = null, $flagWithError = null, $fieldnamePrefix = null, $fieldnamePostfix = null, $entry_id = null)
 		{
-			// Append assets
-			if(class_exists('Administration')) {
-				Administration::instance()->Page->addStylesheetToHead(URL . '/extensions/system_date_fields/assets/system_date_fields.publish.css', 'screen', 104, false);
-			}
-
 			$label = new XMLElement('label');
 			$wrapper->appendChild($label);
 			
 			$row = static::dateFromEntryID($entry_id);
-			$value = DateTimeObj::get(__SYM_DATE_FORMAT__, $row['creation_date_gmt'] . ' +00:00');
-			
-			$label->setValue($this->get('label') . ': ' . $value);
+			$value = $this->formatDate($row['creation_date_gmt']);
+			$time = new XMLElement('time', $value);
+			$label->setValue($this->get('label'));
+			$label->appendChild($time);
+
+			if ($this->get('use_timeago') == 'yes') {
+				$date = DateTimeObj::parse($row['creation_date_gmt'] . ' +00:00');
+				$label->setAttribute('class', 'js-systemdate-timeago');
+				$time->setAttributeArray(array(
+					'utc' => $date->format('U'),
+					'datetime' => $date->format(DateTime::ISO8601),
+					'title' => $time->getValue(),
+				));
+			}
 		}
 
 		public function checkPostFieldData($data, &$message, $entry_id=NULL){
@@ -81,8 +116,12 @@
 
 			if($id === false) return false;
 
+			$show_time = $this->get('show_time');
+			$use_timeago = $this->get('use_timeago');
+
 			$fields = array();
-			$fields['field_id'] = $id;
+			$fields['show_time'] = empty($show_time) ? 'no' : $show_time;
+			$fields['use_timeago'] = empty($use_timeago) ? 'no' : $use_timeago;
 
 			return FieldManager::saveSettings($id, $fields);
 		}
@@ -91,12 +130,10 @@
 		Output:
 	-------------------------------------------------------------------------*/
 
-		public function fetchIncludableElements() {}
-
 		public function prepareTextValue($data, $entry_id = null)
 		{
 			$row = static::dateFromEntryID($entry_id);
-			return DateTimeObj::get(__SYM_DATE_FORMAT__, $row['creation_date_gmt'] . ' +00:00');
+			return $this->formatDate($row['creation_date_gmt']);
 		}
 
 	/*-------------------------------------------------------------------------

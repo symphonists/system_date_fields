@@ -3,3 +3,8 @@
 	min-height: 0;
 	margin-bottom: 0;
 }
+
+.field-systemcreateddate time,
+.field-systemmodifieddate time {
+	display: block;
+}
