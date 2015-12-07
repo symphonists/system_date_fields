@@ -2,11 +2,6 @@
 
 > Exposes the internal creation and modification dates of an entry (read-only) in the format of a normal date field.
 
-NOTE: This field is not complete. The only thing it currently does is added the system dates to the publish table for the section.
-
-TODO: Add Grouping for Data Sources.
-
-
 ## INSTALLATION
 
 1. Upload `system_dates_field` to your Symphony `/extensions` folder.
@@ -19,3 +14,7 @@ TODO: Add Grouping for Data Sources.
 ## USAGE
 
 Functions similar to the normal Date field in Symphony, however it does not allow editing of the value it contains, instead exposing the entry Creation Date and entry Modification Date as stored internally by Symphony.
+
+## NOTES
+
+TODO: Add Grouping for Data Sources.
