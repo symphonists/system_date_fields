@@ -6,6 +6,7 @@
 	<url type="discuss">http://getsymphony.com/discuss/thread/95872/</url>
 	<types>
 		<type>Field</type>
+		<type>Date</type>
 	</types>
 	<authors>
 		<author>
@@ -14,6 +15,11 @@
 		</author>
 	</authors>
 	<releases>
-		<release version="1.0" date="2012-12-18" min="2.3.1" max="2.3.x" />
+		<release version="1.1.0" date="2015-12-07" min="2.6.0" max="2.6.x">
+			- Fix some bugs and code clean up
+			- Added time ago setting
+			- Added show time setting
+		</release>
+		<release version="1.0.0" date="2012-12-18" min="2.3.1" max="2.5.x" />
 	</releases>
 </extension>
