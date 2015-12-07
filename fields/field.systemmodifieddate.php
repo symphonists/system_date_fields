@@ -27,7 +27,7 @@
 		Utilities:
 	-------------------------------------------------------------------------*/
 
-		private static function __dateFromEntryID($entry_id){
+		private static function dateFromEntryID($entry_id){
 			return Symphony::Database()->fetchRow(0, sprintf("
 				SELECT modification_date_gmt
 				FROM `tbl_entries` 
@@ -59,7 +59,7 @@
 			$label = new XMLElement('label');
 			$wrapper->appendChild($label);
 			
-			$row = self::__dateFromEntryID($entry_id);
+			$row = static::dateFromEntryID($entry_id);
 			$value = DateTimeObj::get(__SYM_DATE_FORMAT__, $row['modification_date_gmt'] . ' +00:00');
 			
 			$label->setValue($this->get('label') . ': ' . $value);
@@ -98,12 +98,10 @@
 
 		public function fetchIncludableElements() {}
 
-		public function prepareTableValue($data, XMLElement $link=NULL, $entry_id=NULL) {
-			$row = self::__dateFromEntryID($entry_id);
-
-			$value = DateTimeObj::get(__SYM_DATE_FORMAT__, $row['modification_date_gmt'] . ' +00:00');
-
-			return parent::prepareTableValue(array('value' => $value), $link);
+		public function prepareTextValue($data, $entry_id = null)
+		{
+			$row = static::dateFromEntryID($entry_id);
+			return DateTimeObj::get(__SYM_DATE_FORMAT__, $row['modification_date_gmt'] . ' +00:00');
 		}
 
 	/*-------------------------------------------------------------------------
