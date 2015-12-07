@@ -84,12 +84,7 @@
 			$fields = array();
 			$fields['field_id'] = $id;
 
-			Symphony::Database()->query("
-				DELETE FROM `tbl_fields_systemcreateddate` 
-				WHERE `field_id` = '$id' 
-				LIMIT 1
-			");
-			Symphony::Database()->insert($fields, 'tbl_fields_systemcreateddate');
+			return FieldManager::saveSettings($id, $fields);
 		}
 
 	/*-------------------------------------------------------------------------
