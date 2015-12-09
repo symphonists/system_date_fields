@@ -10,6 +10,10 @@
 
 3. You can now add the "Date: System Created" and "Date: System Modified" fields to your sections.
 
+## OPTIONS
+
+1. Can show date only or date with time (format is defined by the configuration of Symphony)
+2. Can display dates as relative time, i.e. X minutes/hours ago.
 
 ## USAGE
 
