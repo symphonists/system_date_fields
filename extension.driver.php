@@ -78,6 +78,8 @@
 				CREATE TABLE `tbl_fields_systemcreateddate` (
 					`id` int(11) unsigned NOT NULL auto_increment,
 					`field_id` int(11) unsigned NOT NULL,
+					`show_time` enum('yes','no') NOT NULL DEFAULT 'no',
+					`use_timeago` enum('yes','no') NOT NULL DEFAULT 'no',
 					PRIMARY KEY  (`id`),
 					KEY `field_id` (`field_id`)
 				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
@@ -86,6 +88,8 @@
 				CREATE TABLE `tbl_fields_systemmodifieddate` (
 					`id` int(11) unsigned NOT NULL auto_increment,
 					`field_id` int(11) unsigned NOT NULL,
+					`show_time` enum('yes','no') NOT NULL DEFAULT 'no',
+					`use_timeago` enum('yes','no') NOT NULL DEFAULT 'no',
 					PRIMARY KEY  (`id`),
 					KEY `field_id` (`field_id`)
 				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
