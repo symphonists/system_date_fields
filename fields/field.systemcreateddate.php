@@ -130,6 +130,27 @@
 		Output:
 	-------------------------------------------------------------------------*/
 
+		public function prepareTableValue($data, XMLElement $link = null, $entry_id = null)
+		{
+			if ($this->get('use_timeago') == 'yes') {
+				$row = static::dateFromEntryID($entry_id);
+				if (!$link) {
+					$link = new XMLElement('span');
+				}
+				$date = DateTimeObj::parse($row['creation_date_gmt'] . ' +00:00');
+				$link->setAttribute('class', 'js-systemdate-timeago');
+				$time = new XMLElement('time', $this->formatDate($row['creation_date_gmt']));
+				$time->setAttributeArray(array(
+					'utc' => $date->format('U'),
+					'datetime' => $date->format(DateTime::ISO8601),
+					'title' => $time->getValue(),
+				));
+				$link->appendChild($time);
+				return $link->generate();
+			}
+			return parent::prepareTableValue($data, $link, $entry_id);
+		}
+
 		public function prepareTextValue($data, $entry_id = null)
 		{
 			$row = static::dateFromEntryID($entry_id);
