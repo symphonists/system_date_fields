@@ -45,7 +45,19 @@
 
 		private function formatDate($date)
 		{
-			return DateTimeObj::get($this->getDateFormat(), $date . ' +00:00');
+			return DateTimeObj::get($this->getDateFormat(), $date->format('U'));
+		}
+
+		private function parseDate($row)
+		{
+			if (!empty($row) && isset($row['modification_date_gmt'])) {
+				$value = $row['modification_date_gmt'] . ' Etc/UTC';
+			}
+			else {
+				$value = DateTimeObj::getGMT('Y-m-d H:i:s') . ' Etc/UTC';
+			}
+			$date = DateTimeObj::parse($value);
+			return $date;
 		}
 
 	/*-------------------------------------------------------------------------
@@ -84,13 +96,13 @@
 			$wrapper->appendChild($label);
 			
 			$row = static::dateFromEntryID($entry_id);
-			$value = $this->formatDate($row['modification_date_gmt']);
+			$date = $this->parseDate($row);
+			$value = $this->formatDate($date);
 			$time = new XMLElement('time', $value);
 			$label->setValue($this->get('label'));
 			$label->appendChild($time);
 
 			if ($this->get('use_timeago') == 'yes') {
-				$date = DateTimeObj::parse($row['modification_date_gmt'] . ' +00:00');
 				$label->setAttribute('class', 'js-systemdate-timeago');
 				$time->setAttributeArray(array(
 					'utc' => $date->format('U'),
@@ -137,9 +149,9 @@
 				if (!$link) {
 					$link = new XMLElement('span');
 				}
-				$date = DateTimeObj::parse($row['modification_date_gmt'] . ' +00:00');
+				$date = $this->parseDate($row);
 				$link->setAttribute('class', 'js-systemdate-timeago');
-				$time = new XMLElement('time', $this->formatDate($row['modification_date_gmt']));
+				$time = new XMLElement('time', $this->formatDate($date));
 				$time->setAttributeArray(array(
 					'utc' => $date->format('U'),
 					'datetime' => $date->format(DateTime::ISO8601),
@@ -154,7 +166,8 @@
 		public function prepareTextValue($data, $entry_id = null)
 		{
 			$row = static::dateFromEntryID($entry_id);
-			return $this->formatDate($row['modification_date_gmt']);
+			$date = $this->parseDate($row);
+			return $this->formatDate($date);
 		}
 
 	/*-------------------------------------------------------------------------
