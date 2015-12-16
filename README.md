@@ -1,16 +1,6 @@
 # System Dates
 
-- Version: 1.0
-- Author: Symphonists Community
-- Build Date: 18th December 2012
-- Requirements: Symphony 2.3.1+
-
-Exposes the internal creation and modification dates of an entry (read-only) in the format of a normal date field.
-
-NOTE: This field is not complete. The only thing it currently does is added the system dates to the publish table for the section.
-
-TODO: Add Grouping for Datasources.
-
+> Exposes the internal creation and modification dates of an entry (read-only) in the format of a normal date field.
 
 ## INSTALLATION
 
@@ -20,7 +10,15 @@ TODO: Add Grouping for Datasources.
 
 3. You can now add the "Date: System Created" and "Date: System Modified" fields to your sections.
 
+## OPTIONS
+
+1. Can show date only or date with time (format is defined by the configuration of Symphony)
+2. Can display dates as relative time, i.e. X minutes/hours ago.
 
 ## USAGE
 
 Functions similar to the normal Date field in Symphony, however it does not allow editing of the value it contains, instead exposing the entry Creation Date and entry Modification Date as stored internally by Symphony.
+
+## NOTES
+
+TODO: Add Grouping for Data Sources.
