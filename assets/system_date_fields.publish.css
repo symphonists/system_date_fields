@@ -1,10 +1,22 @@
-.field-systemcreateddate,
-.field-systemmodifieddate {
-	min-height: 0;
-	margin-bottom: 0;
-}
+/**
+* The class "field-value-readonly" is used for styling the fields readonly values in the publish area.
+* It has been added to the core in Symphony 2.6.5:
+*
+* https://github.com/symphonycms/symphony-2/pull/2534
+* https://github.com/symphonycms/symphony-2/issues/2532
+*
+* This css-file is meant for backwards-compatibility and offer proper styling for Symphony versions prior to 2.6.5.
+* As soon as this extension stops supporting Symphony versions 2.6.4 and below this css-file will be redundant and can be removed.  
+*/
 
-.field-systemcreateddate time,
-.field-systemmodifieddate time {
+.field-value-readonly {
 	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 2.2rem;
+	margin-top: 0.2rem;
+	padding: 0.2rem 0.3rem 0.2rem 0;
+	font-family: inherit;
+	font-size: 109.09%;
+	opacity: 0.5;
 }

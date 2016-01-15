@@ -106,7 +106,7 @@
 			$row = $this->dateFromEntryID($entry_id);
 			$date = $this->parseDate($row);
 			$value = $this->formatDate($date);
-			$time = new XMLElement('time', $value);
+			$time = new XMLElement('time', $value, array('class' => 'field-value-readonly'));
 			$label->setValue($this->get('label'));
 			$label->appendChild($time);
 
