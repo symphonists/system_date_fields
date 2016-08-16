@@ -15,6 +15,10 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="1.2.1" date="2016-08-16" min="2.6.0" max="2.6.x">
+			- Supported on PHP 7
+			- Fix params to fit parent signature
+		</release>		
 		<release version="1.2.0" date="2016-01-15" min="2.6.0" max="2.6.x">
 			- Unify Styling of readonly values
 		</release>
