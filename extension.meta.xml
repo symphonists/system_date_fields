@@ -15,6 +15,9 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="1.2.1" date="2017-03-20" min="2.6.0" max="2.6.x">
+			- PHP7 compatibility
+		</release>
 		<release version="1.2.0" date="2016-01-15" min="2.6.0" max="2.6.x">
 			- Unify Styling of readonly values
 		</release>
