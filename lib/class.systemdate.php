@@ -37,8 +37,8 @@
 		{
 			return Symphony::Database()->fetchRow(0, sprintf("
 				SELECT %s
-				FROM `tbl_entries` 
-				WHERE `id` = %d 
+				FROM `tbl_entries`
+				WHERE `id` = %d
 				LIMIT 1
 			", $this->getFieldName(), $entry_id));
 		}
@@ -102,7 +102,7 @@
 		{
 			$label = new XMLElement('label');
 			$wrapper->appendChild($label);
-			
+
 			$row = $this->dateFromEntryID($entry_id);
 			$date = $this->parseDate($row);
 			$value = $this->formatDate($date);
@@ -189,7 +189,7 @@
 		Filtering:
 	-------------------------------------------------------------------------*/
 
-		public function buildSortingSQL(&$joins, &$where, &$sort, $order = 'ASC')
+		public function buildSortingSQL(&$joins, &$where, &$sort, $order = 'ASC', &$select = NULL)
 		{
 			$fieldname = $this->getFieldName();
 			$sort = 'ORDER BY ' . (in_array(strtolower($order), array('random', 'rand')) ? 'RAND()' : "`e`.`$fieldname` $order");
