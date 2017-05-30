@@ -189,7 +189,7 @@
 		Filtering:
 	-------------------------------------------------------------------------*/
 
-		public function buildSortingSQL(&$joins, &$where, &$sort, $order = 'ASC', &$select = NULL)
+		public function buildSortingSQL(&$joins, &$where, &$sort, $order = 'ASC')
 		{
 			$fieldname = $this->getFieldName();
 			$sort = 'ORDER BY ' . (in_array(strtolower($order), array('random', 'rand')) ? 'RAND()' : "`e`.`$fieldname` $order");
