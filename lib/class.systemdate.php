@@ -195,5 +195,13 @@
 			$sort = 'ORDER BY ' . (in_array(strtolower($order), array('random', 'rand')) ? 'RAND()' : "`e`.`$fieldname` $order");
 		}
 
+		public function buildSortingSelectSQL($sort, $order = 'ASC')
+		{
+			if ($this->isRandomOrder($order)) {
+				return null;
+			}
+			$fieldname = $this->getFieldName();
+			return "`e`.`$fieldname`";
+		}
 	}
 
