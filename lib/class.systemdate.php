@@ -125,10 +125,10 @@
 			return self::__OK__;
 		}
 
-		public function processRawFieldData($data, &$status, &$message = NULL, $simulate = false, $entry_id = null)
+		public function processRawFieldData($data, &$status, &$message = null, $simulate = false, $entry_id = null)
 		{
 			$status = self::__OK__;
- 			return NULL;
+ 			return null;
 		}
 
 		public function commit()

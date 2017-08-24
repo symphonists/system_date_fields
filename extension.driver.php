@@ -51,13 +51,13 @@
 			if ($ret && version_compare($previousVersion,'1.1.0') == -1) {
 				$ret1 = Symphony::Database()->query("
 					ALTER TABLE `tbl_fields_systemcreateddate`
-					ADD COLUMN `show_time` enum('yes','no') NOT NULL DEFAULT 'no',
-					ADD COLUMN `use_timeago` enum('yes','no') NOT NULL DEFAULT 'no'
+					ADD COLUMN `show_time` ENUM('yes','no') NOT NULL DEFAULT 'no',
+					ADD COLUMN `use_timeago` ENUM('yes','no') NOT NULL DEFAULT 'no'
 				");
 				$ret2 = Symphony::Database()->query("
 					ALTER TABLE `tbl_fields_systemmodifieddate`
-					ADD COLUMN `show_time` enum('yes','no') NOT NULL DEFAULT 'no',
-					ADD COLUMN `use_timeago` enum('yes','no') NOT NULL DEFAULT 'no'
+					ADD COLUMN `show_time` ENUM('yes','no') NOT NULL DEFAULT 'no',
+					ADD COLUMN `use_timeago` ENUM('yes','no') NOT NULL DEFAULT 'no'
 				");
 				$ret = $ret1 && $ret2;
 			}
@@ -76,20 +76,20 @@
 		{
 			$ret1 = Symphony::Database()->query("
 				CREATE TABLE `tbl_fields_systemcreateddate` (
-					`id` int(11) unsigned NOT NULL auto_increment,
-					`field_id` int(11) unsigned NOT NULL,
-					`show_time` enum('yes','no') NOT NULL DEFAULT 'no',
-					`use_timeago` enum('yes','no') NOT NULL DEFAULT 'no',
+					`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+					`field_id` INT(11) UNSIGNED NOT NULL,
+					`show_time` ENUM('yes','no') NOT NULL DEFAULT 'no',
+					`use_timeago` ENUM('yes','no') NOT NULL DEFAULT 'no',
 					PRIMARY KEY  (`id`),
 					KEY `field_id` (`field_id`)
 				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 			");
 			$ret2 = Symphony::Database()->query("
 				CREATE TABLE `tbl_fields_systemmodifieddate` (
-					`id` int(11) unsigned NOT NULL auto_increment,
-					`field_id` int(11) unsigned NOT NULL,
-					`show_time` enum('yes','no') NOT NULL DEFAULT 'no',
-					`use_timeago` enum('yes','no') NOT NULL DEFAULT 'no',
+					`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+					`field_id` INT(11) UNSIGNED NOT NULL,
+					`show_time` ENUM('yes','no') NOT NULL DEFAULT 'no',
+					`use_timeago` ENUM('yes','no') NOT NULL DEFAULT 'no',
 					PRIMARY KEY  (`id`),
 					KEY `field_id` (`field_id`)
 				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
