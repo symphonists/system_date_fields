@@ -49,16 +49,40 @@
 			$ret = true;
 
 			if ($ret && version_compare($previousVersion,'1.1.0') == -1) {
-				$ret1 = Symphony::Database()->query("
-					ALTER TABLE `tbl_fields_systemcreateddate`
-					ADD COLUMN `show_time` ENUM('yes','no') NOT NULL DEFAULT 'no',
-					ADD COLUMN `use_timeago` ENUM('yes','no') NOT NULL DEFAULT 'no'
-				");
-				$ret2 = Symphony::Database()->query("
-					ALTER TABLE `tbl_fields_systemmodifieddate`
-					ADD COLUMN `show_time` ENUM('yes','no') NOT NULL DEFAULT 'no',
-					ADD COLUMN `use_timeago` ENUM('yes','no') NOT NULL DEFAULT 'no'
-				");
+				$ret1 = Symphonmy::Database()
+					->alter('tbl_fields_systemcreateddate')
+					->add([
+						'show_time' => [
+							'type' => 'enum',
+							'values' => ['yes','no'],
+							'default' => 'no',
+						],
+						'use_timeago' => [
+							'type' => 'enum',
+							'values' => ['yes','no'],
+							'default' => 'no',
+						],
+					])
+					->execute()
+					->success();
+
+				$ret2 = Symphonmy::Database()
+					->alter('tbl_fields_systemmodifieddate')
+					->add([
+						'show_time' => [
+							'type' => 'enum',
+							'values' => ['yes','no'],
+							'default' => 'no',
+						],
+						'use_timeago' => [
+							'type' => 'enum',
+							'values' => ['yes','no'],
+							'default' => 'no',
+						],
+					])
+					->execute()
+					->success();
+
 				$ret = $ret1 && $ret2;
 			}
 
@@ -67,33 +91,81 @@
 
 		public function uninstall()
 		{
-			$ret1 = Symphony::Database()->query("DROP TABLE `tbl_fields_systemcreateddate`");
-			$ret2 = Symphony::Database()->query("DROP TABLE `tbl_fields_systemmodifieddate`");
+			$ret1 = Symphony::Database()
+				->drop('tbl_fields_systemcreateddate')
+				->ifExists()
+				->execute()
+				->success();
+
+			$ret2 = Symphony::Database()
+				->drop('tbl_fields_systemmodifieddate')
+				->ifExists()
+				->execute()
+				->success();
+
 			return $ret1 && $ret2;
 		}
 
 		public function install()
 		{
-			$ret1 = Symphony::Database()->query("
-				CREATE TABLE `tbl_fields_systemcreateddate` (
-					`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-					`field_id` INT(11) UNSIGNED NOT NULL,
-					`show_time` ENUM('yes','no') NOT NULL DEFAULT 'no',
-					`use_timeago` ENUM('yes','no') NOT NULL DEFAULT 'no',
-					PRIMARY KEY  (`id`),
-					KEY `field_id` (`field_id`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
-			");
-			$ret2 = Symphony::Database()->query("
-				CREATE TABLE `tbl_fields_systemmodifieddate` (
-					`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-					`field_id` INT(11) UNSIGNED NOT NULL,
-					`show_time` ENUM('yes','no') NOT NULL DEFAULT 'no',
-					`use_timeago` ENUM('yes','no') NOT NULL DEFAULT 'no',
-					PRIMARY KEY  (`id`),
-					KEY `field_id` (`field_id`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
-			");
+			$ret1 = Symphony::Database()
+				->create('tbl_fields_systemcreateddate')
+				->ifNotExists()
+				->charset('utf8')
+				->collate('utf8_unicode_ci')
+				->fields([
+					'id' => [
+						'type' => 'int(11)',
+						'auto' => true,
+					],
+					'field_id' => 'int(11)',
+					'show_time' => [
+						'type' => 'enum',
+						'values' => ['yes','no'],
+						'default' => 'no',
+					],
+					'use_timeago' => [
+						'type' => 'enum',
+						'values' => ['yes','no'],
+						'default' => 'no',
+					],
+				])
+				->keys([
+					'id' => 'primary',
+					'field_id' => 'key',
+				])
+				->execute()
+				->success();
+
+			$ret2 = Symphony::Database()
+				->create('tbl_fields_systemmodifieddate')
+				->ifNotExists()
+				->charset('utf8')
+				->collate('utf8_unicode_ci')
+				->fields([
+					'id' => [
+						'type' => 'int(11)',
+						'auto' => true,
+					],
+					'field_id' => 'int(11)',
+					'show_time' => [
+						'type' => 'enum',
+						'values' => ['yes','no'],
+						'default' => 'no',
+					],
+					'use_timeago' => [
+						'type' => 'enum',
+						'values' => ['yes','no'],
+						'default' => 'no',
+					],
+				])
+				->keys([
+					'id' => 'primary',
+					'field_id' => 'key',
+				])
+				->execute()
+				->success();
+
 			return $ret1 && $ret2;
 		}
 	}

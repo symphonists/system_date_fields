@@ -18,6 +18,7 @@
 		<release version="2.0.0" date="TBA" min="4.0.0" max="4.x.x" php-min="5.6.x" php-max="7.x.x">
 			- Update for Symphony 4.x
 			- PHP7 compatibility
+			- Code refactoring for Database and EQFA
 		</release>
 		<release version="1.2.2" date="2017-06-20" min="2.6.0" max="2.x.x">
 			- Symphony 2.7.0 compatibility
