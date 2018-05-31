@@ -35,12 +35,13 @@
 
 		private function dateFromEntryID($entry_id)
 		{
-			return Symphony::Database()->fetchRow(0, sprintf("
-				SELECT %s
-				FROM `tbl_entries`
-				WHERE `id` = %d
-				LIMIT 1
-			", $this->getFieldName(), $entry_id));
+			return Symphony::Database()
+				->select([$this->getFieldName()])
+				->from('tbl_entries')
+				->where(['id' => $entry_id])
+				->limit(1)
+				->execute()
+				->rows()[0];
 		}
 
 		private function getDateFormat()
