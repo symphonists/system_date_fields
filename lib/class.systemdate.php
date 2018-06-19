@@ -41,7 +41,7 @@
 				->where(['id' => $entry_id])
 				->limit(1)
 				->execute()
-				->rows()[0];
+				->next();
 		}
 
 		private function getDateFormat()
