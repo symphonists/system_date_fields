@@ -35,12 +35,13 @@
 
 		private function dateFromEntryID($entry_id)
 		{
-			return Symphony::Database()->fetchRow(0, sprintf("
-				SELECT %s
-				FROM `tbl_entries` 
-				WHERE `id` = %d 
-				LIMIT 1
-			", $this->getFieldName(), $entry_id));
+			return Symphony::Database()
+				->select([$this->getFieldName()])
+				->from('tbl_entries')
+				->where(['id' => $entry_id])
+				->limit(1)
+				->execute()
+				->next();
 		}
 
 		private function getDateFormat()
@@ -102,7 +103,7 @@
 		{
 			$label = new XMLElement('label');
 			$wrapper->appendChild($label);
-			
+
 			$row = $this->dateFromEntryID($entry_id);
 			$date = $this->parseDate($row);
 			$value = $this->formatDate($date);
@@ -125,10 +126,10 @@
 			return self::__OK__;
 		}
 
-		public function processRawFieldData($data, &$status, &$message = NULL, $simulate = false, $entry_id = null)
+		public function processRawFieldData($data, &$status, &$message = null, $simulate = false, $entry_id = null)
 		{
 			$status = self::__OK__;
- 			return NULL;
+ 			return null;
 		}
 
 		public function commit()
