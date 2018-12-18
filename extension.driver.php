@@ -111,8 +111,6 @@
 			$ret1 = Symphony::Database()
 				->create('tbl_fields_systemcreateddate')
 				->ifNotExists()
-				->charset('utf8')
-				->collate('utf8_unicode_ci')
 				->fields([
 					'id' => [
 						'type' => 'int(11)',
@@ -140,8 +138,6 @@
 			$ret2 = Symphony::Database()
 				->create('tbl_fields_systemmodifieddate')
 				->ifNotExists()
-				->charset('utf8')
-				->collate('utf8_unicode_ci')
 				->fields([
 					'id' => [
 						'type' => 'int(11)',
